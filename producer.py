@@ -111,18 +111,29 @@ value_schema_str = """
      }
    ]
  }
+ """
 
 value_schema = avro.loads(value_schema_str)
 
 
 
-# def delivery_report(err, msg):
-#     """ Called once for each message produced to indicate delivery result.
-#         Triggered by poll() or flush(). """
-#     if err is not None:
-#         print('Message delivery failed: {}'.format(err))
-#     else:
-#         print('Message delivered to {} [{}]'.format(msg.topic(), msg.partition()))
+def delivery_report(err, msg):
+    """ Called once for each message produced to indicate delivery result.
+        Triggered by poll() or flush(). """
+    if err is not None:
+        print('Message delivery failed: {}'.format(err))
+    else:
+        print('Message delivered to {} [{}]'.format(msg.topic(), msg.partition()))
+
+schema_registry_conf = {'url': 'http://schema-registry:8081'}
+schema_registry_client = SchemaRegistryClient(schema_registry_conf)
+avro_serializer = AvroSerializer(value_schema_str, schema_registry_client, caseToDict)
+producer_conf = {'bootstrap.servers': 'kafka:29092',
+                    'key.serializer': StringSerializer('utf_8'),
+                    'value.serializer': avro_serializer}
+
+producer = SerializingProducer(producer_conf)
+        
 
 
 
