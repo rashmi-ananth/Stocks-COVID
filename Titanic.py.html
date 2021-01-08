@@ -1,0 +1,75 @@
+
+# coding: utf-8
+
+# In[40]:
+
+import numpy as np
+import seaborn as sns
+import pandas as pd
+import matplotlib.pyplot as plt
+
+
+# In[41]:
+
+train = pd.read_csv('train.csv')
+
+
+# In[42]:
+
+train
+
+
+# In[43]:
+
+
+
+
+# In[58]:
+
+train[train['Pclass'] == 1]['PassengerId'].count()/train[['PassengerId']].count()
+
+
+# In[54]:
+
+train[train['Pclass'] == 1 & (train['Embarked'] == 'C')]['PassengerId'].count() / train[train['Embarked'] == 'C']['PassengerId'].count()
+
+
+# In[55]:
+
+train[train['Pclass'] == 1 & (train['Embarked'] == 'S')]['PassengerId'].count() / train[train['Embarked'] == 'S']['PassengerId'].count()
+
+
+# In[56]:
+
+train[train['Pclass'] == 1 & (train['Embarked'] == 'Q')]['PassengerId'].count() / train[train['Embarked'] == 'Q']['PassengerId'].count()
+
+
+# In[61]:
+
+train[train['Pclass'] == 1]['PassengerId'].count()/train[train['Survived'] == 1]['PassengerId'].count()
+
+
+# In[62]:
+
+train[train['Pclass'] == 1 & (train['Sex'] == 'female')]['PassengerId'].count()/train[train['Survived'] == 1]['PassengerId'].count()
+
+
+# In[63]:
+
+train[train['Pclass'] == 1 & (train['Age'] <= 19)]['PassengerId'].count()/train[train['Survived'] == 1]['PassengerId'].count()
+
+
+# In[64]:
+
+train[train['Pclass'] == 1 & (train['Age'] >= 25)]['PassengerId'].count()/train[train['Survived'] == 1]['PassengerId'].count()
+
+
+# In[69]:
+
+train[train['Pclass'] == 1 & (train['Age'] >= 19)]['PassengerId'].count()/train[train['Survived'] == 1]['PassengerId'].count()
+
+
+# In[ ]:
+
+
+
